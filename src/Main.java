@@ -1,9 +1,30 @@
 public class Main {
+
+    /*
+        Use the following methods:
+            .length()
+            .substring(start,finish) doesn't include finish
+            .substring(start) goes to the end
+            .indexOf(someString)
+            someString.equals(otherString)
+     */
     public static void main(String[] args) {
         System.out.println(VowelCount("This is a string."));
         System.out.println("Correct output: 4");
+        System.out.println(VowelCount(""));
+        System.out.println("Correct output: 0");
+        System.out.println(VowelCount("AEIOU"));
+        System.out.println("Correct output: 5");
+        System.out.println(VowelCount("A/EI$&^*$OU56408"));
+        System.out.println("Correct output: 5");
+        ///////////////////////////////////////////
+
         System.out.println(VowelRemover("Remove all of the vowels."));
-        System.out.println("Correct output: Rmv ll f th vwls");
+        System.out.println("Correct output: Rmv ll f th vwls.");
+        System.out.println(VowelRemover("I don't know."));
+        System.out.println("Correct output: Rmv ll f th vwls.");
+
+        ///////////////////////////////////////////
         System.out.println(ContainsSubstring("Sentence","ten"));
         System.out.println("Correct output: true");
         System.out.println(ReverseString("ABCDEF"));
@@ -13,13 +34,22 @@ public class Main {
     }
 
     /**
-     * Count the vowels in the input string regardless of case
+     * Count the vowels (a,e,i,o,u) in the input string regardless of case
      * @param input String
      * @return vowel count int
      */
     public static int VowelCount(String input){
-
-        return -1;
+        int length = input.length();
+        String lowerCaseInput = input.toLowerCase();
+        int count = 0;
+        for(int i = 0; i<length; i++){
+            String letter = lowerCaseInput.substring(i,i+1);
+            if(letter.equals("a")||letter.equals("e")||letter.equals("i")
+            ||letter.equals("o")||letter.equals("u")){
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -28,8 +58,35 @@ public class Main {
      * @return String with no vowels
      */
     public static String VowelRemover(String input){
+        /*
+        Solution 1: using regex
+        String newString = input.replaceAll("[aeiouAEIOU]","");
+        return newString;*/
 
-        return "";
+        /*
+        Solution 2*/
+        int length = input.length();
+        String noVowels = "";
+        for(int i = 0; i<length; i++){
+            String letter = input.substring(i,i+1);
+            if(!(letter.toLowerCase().equals("a")||letter.toLowerCase().equals("e")||letter.toLowerCase().equals("i")
+                    ||letter.toLowerCase().equals("o")||letter.toLowerCase().equals("u"))){
+                noVowels = noVowels + letter;
+            }
+        }
+        return noVowels;
+
+        /*
+        Smith's Solution
+        String output = "";
+        for(int i = 0; i<input.length(); i++){
+            String letter = input.substring(i,i+1).toLowerCase();
+            if(!letter.equals("a") && !letter.equals("e") && !letter.equals("i") && !letter.equals("o") && !letter.equals("u")){
+                output += input.substring(i,i+1);
+            }
+        }
+        return output;*/
+
     }
 
     /**
