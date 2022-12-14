@@ -23,12 +23,18 @@ public class Main {
         System.out.println("Correct output: Rmv ll f th vwls.");
         System.out.println(VowelRemover("I don't know."));
         System.out.println("Correct output: Rmv ll f th vwls.");
-
+        System.out.println();
         ///////////////////////////////////////////
         System.out.println(ContainsSubstring("Sentence","ten"));
-        System.out.println("Correct output: true");
+        System.out.println("Sentence contains ten: true");
+        System.out.println(ContainsSubstring("Lanyard","yard"));
+        System.out.println("Lanyard contains yard: true");
+        System.out.println();
+        ///////////////////////////////////////////
         System.out.println(ReverseString("ABCDEF"));
         System.out.println("Correct output: FEDCBA");
+
+        ///////////////////////////////////////////
         System.out.println(PalindromeChecker("level"));
         System.out.println("Correct output: true");
     }
@@ -96,8 +102,26 @@ public class Main {
      * @return true if target found, false otherwise
      */
     public static boolean ContainsSubstring(String input, String target){
-
+        /* Method 1 - similar to AP Classroom */
+        int inputLength = input.length();
+        int targetLength = target.length();
+        int maxLength = inputLength - targetLength;
+        for(int i = 0; i<= maxLength; i++){
+            String currentPortion = input.substring(i,i+targetLength);
+            if(currentPortion.equals(target)){
+                return true;
+            }
+        }
         return false;
+
+        /* Method 2
+        return input.contains(target);
+        return input.toLowerCase().contains(target.toLowerCase()) //if not case sensitive
+        */
+
+
+        /* Method 3
+        return input.indexOf(target) >= 0;*/
     }
 
     /**
@@ -106,8 +130,13 @@ public class Main {
      * @return reversed input String
      */
     public static String ReverseString(String input){
-
-        return "";
+        String output = "";
+        int inputLength = input.length();
+        for(int i = inputLength-1; i>=0; i--){
+            String singleChar = input.substring(i,i+1);
+            output = output + singleChar;
+        }
+        return output;
     }
 
     /**
@@ -117,6 +146,6 @@ public class Main {
      */
     public static boolean PalindromeChecker(String input){
 
-        return false;
+        return input.equals(ReverseString(input));
     }
 }
